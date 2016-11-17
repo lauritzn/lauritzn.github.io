@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Closures</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">	
+  </head>
+  <body>
+    <h1>Closures</h1>
+    <p>To understand what a closure is, let's take a moment to examine the following code snippet:</p>
+    <div class="codeArea">
+    <pre>  
+    function solveCrime(){
+      var name = "Sherlock Holmes"
+      var sidekick = "Watson";
+      var expression = this.name + " has solved the crime with the help of " + this.sidekick +"!";
+      console.log(expression);
+    }
+    solveCrime();
+    console.log(expression);
+   </pre>
+   </div>
+   <p>If you test this you will find that the line<br/><br/><span class="codeText">solveCrime();</span><br/><br/> works fine, but <br/><br/><span class="codeText">console.log(expression);</span><br/><br/> goes on to cause the error message "Uncaught ReferenceError: expression is not defined."  This is because within the scope of the <span class="codeText">solveCrime</span> function, <span class="codeText">expression</span> is indeed defined, but as soon as the function exits, that variable is out of scope and has no definition.</p>
+   <p>One way to keep the variable <span class="codeText">expression</span> from passing completely out of reach is to return it from the function.  But there is also another, more powerful and versatile way to solve the problem.</p>
+   <p>The basic idea is that we wrap the function together with the local variables it uses inside another, outer function.  Because the whole inner function and its contents will need to be accessed by the "outside world" to which they are returned, the function and its local variables (known as its "environment") are effectively preserved for outside access by this method. The result is called a closure.</p>
+   <p>Here is what that might look like for the case above:</p>
+   <div class="codeArea">
+   <pre>
+   var solveCrime = function(){
+     var name = "Sherlock Holmes";
+     var sidekick = "Watson";
+     var expression = this.name + " has solved the crime with the help of " + this.sidekick +"!";
+     function getExpression(){
+       return expression;
+     }
+     return getExpression;
+   }
+    </pre>
+    </div>
+    <p>Note that the closure here consists of the function <span class="codeText">getExpression</span> and the local variable it uses, namely <span class="codeText">expression.</span></p>
+    <p>The function would then be called as follows:</p>
+    <div class="codeArea">
+    <pre>
+    var ourFunction = solveCrime();  // ourFunction will be the function that is returned by solveCrime, namely getExpression <br/>
+    var expression = ourFunction();  // calls the function, which is the same as calling getExpression() <br/>
+    console.log(expression);         // displays the value returned to the console
+    </pre>
+    </div>
+    <p>This can also be condensed to:</p>
+    <div class="codeArea">
+    <pre>
+    var ourFunction = solveCrime(); <br />
+    console.log(ourFunction());
+    </pre>
+    </div>
+    <p>At this point you can probably start to see the connection to private class members in a language like C++!  Because <span class = "codeText">getExpression</span> is returned through the function <span class="codeText">solveCrime</span>, we are in effect able to call it from outside the function.  In this sense it is a little bit like a public accessor method, or "getter." The variable <span class="codeText">expression</span> is, in turn, a little bit like a private member to which we only have access via the public get method.</p>
+    <p>This <span class= "codeText">solveCrime</span> function is fine and dandy for Sherlock Holmes, but what about Hercule Poirot?  We don’t have a class yet because this code is too specific.  It behaves more like a single instance of an object (one particular detective) than like a class (detectives in general).  In other words, we’ve managed to get something similar to private variables, but we haven't made them private <span class="emphasis">class member</span> variables.  </p>
+	<p>We could further generalize our function with some parameters:</p>
+	<div class="codeArea">
+    <pre>
+    var solveCrime = function(dName, dSidekick){
+      var name = dName;
+      var sidekick = dSidekick;
+      var expression = name + " has solved the crime with the help of " + sidekick +"!";
+      function getExpression(){
+        return expression;
+      }
+      return getExpression;
+    }
+    </pre>
+    </div>
+    <p>But this still gives us only one function (<span class = "codeText">solveCrime</span>), rather than a class (<span class="codeText">Detective</span>).  Let's keep going!</p>
+	<p>
+      <a href = "publicVsPrivate.html">Previous</a>&nbsp&nbsp
+      <a href = "objectNotation.html">Next</a>
+    </p>
+  </body>
+</html>

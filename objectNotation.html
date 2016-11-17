@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Closures and Member Functions</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">	
+  </head>
+  <body>
+   <h1>Using Closures to Create Member Functions</h1>  
+   <p> In order to create our class with multiple member functions, we can make use of another kind of notation that JavaScript gives us for objects.  This notation is one that lets us define objects on the fly, as collections or "bundles" of properties, so to speak.  It combines the use of curly braces with the use of a colon</p>
+  
+   <p>Here's an example of how we could create an individual detective (but not the class Detective) using this notation:</p>
+   <div class="codeArea">
+   <pre>
+   var detective1 = {            // curly braces indicate the start of the object
+     name: "Sherlock Holmes",    // colon is used to create and name each property of the object
+     sidekick: "Dr. Watson",
+     solveCrime: function(){
+       console.log(this.name + " has solved the crime with the help of " + this.sidekick + "!");
+     }
+   }
+   detective1.solveCrime();
+   console.log(detective1.name);
+   console.log(detective1.sidekick);  
+   </pre>
+   </div>
+   <p>The braces here are used to "bundle together" a hodgepodge of properties -- two strings, <span class="codeText">name</span> and <span class="codeText">sidekick</span>, and one function, <span class="codeText">solveCrime</span> -- into the object that is called detective1.  These properties can then be called on that object as usual, by employing the dot operator.</p>
+   <p> Recall that we want is for our Detective class is to be able to return not just one, but <span class = "emphasis">multiple</span> functions, which will be the public functions for our class.  The notation we just discussed, combining curly braces with the colon, will let us do this, by "bundling together" all the functions we want as properties of a single object.  Let's see how this works!</p>
+   <div class = "codeArea">
+   <pre>
+   var Detective = function(dName, dSidekick){
+     var name = dName; 
+     var sidekick = dSidekick; 
+     var notebook = []; 
+     notebook.push("It was a dark and stormy night.");
+     return {  	
+       solveCrime: function(){ 
+         console.log(name + " has solved the crime with the help of " + sidekick +"!");
+       },
+       addToNotebook: function(newNote){
+         notebook.push(newNote);
+       }
+     }
+   };
+   </pre>
+   </div>
+   <p>Let's break this down.  What is returned by the function Detective (the constructor) is an object which has two properties: the function  <span class = "codeText">solveCrime</span> and the  function  <span class = "codeText">addToNotebook</span>.   This gives us two functions we can call later, as the public methods of our class!  The closures created preserve the environment for these functions, which consists of the local variables <span class = "codeText">name, sidekick,</span> and <span class = "codeText">notebook</span>.</p>
+   <p>Because what gets returned is an object (defined by the middle set of curly braces), our constructor is a real constructor that yields an object.  Its methods can be called just like we would expect, via the dot operator.</p>
+   <p>Notice that the "member variables" of our class are <span class = "emphasis">not</span> declared using <span class = "codeText">this</span>. Why not?  Because the <span class = "codeText">this</span> keyword always indicates the object that the member belongs to. If the <span class = "codeText">this</span> keyword were used, then the variables could be directly accessed outside the class using the dot operator combined with the name of the object.  In other words, they would be publicly accessible and publicly changeable!  The variables as we've used them above, on the other hand, are really <span class = "emphasis">local</span> variables that, because they are part of the environment preserved by the closure, act like or "imitate" private data members that can be accessed by public member functions.</p>
+   <p>You can test this out with the following code:</p>
+   <div class="codeArea">
+   <pre>
+   var detective1 = new Detective("Sherlock Holmes", "Dr. Watson");
+   detective1.solveCrime();
+   var detective2 = new Detective("Hercule Poirot", "Captain Hastings");
+   detective2.solveCrime();
+   </pre>
+   </div>
+   <p>And it works! We now have public member functions, combined with private class member variables.</p>
+   <p>As an exercise, try editing the code above that declares the Detective class to add a get method a set method. The get method returns the value of the private variable, and would be called like this:<br/></p>
+   <div class="codeArea">
+   <pre>
+   var name1 = detective1.getName();
+   var sidekick1 = detective1.getSidekick();
+   </pre>
+   </div>
+   <p>The set method changes the value of the private variable, and would be called like this: <br/></p>
+   <div class="codeArea">
+   <pre>
+   detective1.setName("Hercule Poirot");
+   detective1.setSidekick("Captain Hastings");
+   </pre>
+   </div>
+   <p>We'll show the results on the next page!</p>
+   <p>
+    <a href = closures.html>Previous</a>&nbsp&nbsp
+    <a href = gettersAndSetters.html>Next</a>	  
+   </p>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+p{
+    
+	margin: 0px 100px 20px 50px;
+	font-family: "Fixedsys Regular";
+	/*width: 85%*/
+	
+}
+
+h1{
+	margin: 40px 9px 30px 20px;
+}
+
+h2{
+	margin: 40px 9px 15px 20px;
+}
+
+ul{
+	margin: 9px 9px 40px 20px;
+}
+.codeText{
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-size: 85%;
+}
+.codeArea{
+	
+	position: relative;
+    top: 5px;
+	padding:10px;
+	margin: 0px 100px 20px 50px;
+	/*Source: meta.stackexchange.com/questions/138651/name-of-the-font-used-for-code-snippets-on-stackoverflow*/
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	font-size: 100%;
+	background-color: #eeeeee;
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	
+}
+
+.emphasis{
+	
+	font-style: italic;
+}
+
+.demoProgram{
+	margin: 0px 100px 20px 50px;
+	padding: 10px;
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	width: 50%;
+}
+}

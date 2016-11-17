@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Put It Together</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">
+  </head>
+  <body>
+   	<h1>Putting It All Together</h1>
+	<p> Here's a final version of our Detective class: </p>
+    <div class = "codeArea">	
+	<pre>
+    var Detective = function(dName, dSidekick){
+      var name = dName;
+      var sidekick = dSidekick;
+      var solution = "none";
+      var notebook = [];
+      notebook.push("It was a dark and stormy night."); 	
+      return {
+        getName: function() {
+        return name;
+        },
+        getSidekick: function(){
+          return sidekick;
+        },
+        getNotebook: function(){
+          return notebook;
+        },
+        getSolution: function(){
+          return solution;
+        },
+        compareSolution: function(otherDetective){
+          if (solution == otherDetective.getSolution()){
+            return true;
+          }
+          else{
+            return false;
+          }
+        },
+        setName: function(newName){
+          name = newName;
+        },
+        setSidekick: function(newSidekick){
+          sidekick = newSidekick;
+        },
+        setSolution: function(newSolution){
+          solution = newSolution;
+        },
+        addToNotebook: function(note){
+          notebook.push(note);
+        },
+        solveCrime: function(){
+          var response = name + " has solved the crime with the help of " + sidekick + "!";
+          return response;
+        }  
+      }
+    };
+    </pre>
+    </div>
+    <p>This version is just what we've built, except that it returns values instead of logging them to the console.  That way we'll be able to display them in an HTML page in the browser.</p>
+    <h2>Let's Play Detective!</h2>
+	<p>
+	  <a href = "differences.html">Previous</a>&nbsp&nbsp
+      <a href = "detective.html">Next</a>
+    </p>	  
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">
+  </head>
+  <body>
+   <h1>How Private is Too Private?</h1>
+   <p>Suppose for the sake of demonstration that you want to create two detectives, one for the player and one for the game.  Let's say:</p>  
+   <div class = "codeArea">
+   <pre>
+   var playerDetective = new Detective("Player 1", "Sidekick 1");
+   var masterDetective = new Detective("Master Detective", "Ultimate Sidekick");
+   </pre>
+   </div>  
+   <p>Let's also say that the goal of the game is to arrive at the same solution as the Master Detective.  In order to do this, you add a variable to store the solution that each detective comes up with, along with two new functions to add to the Detective class, a setter for the solution and a function that compares the solutions of two different detectives.</p>
+   <p>Before we figure out at what this looks like in JavaScript, let's consider for comparison what we could do in C++.  In C++ you could declare the class as follows:</p>
+   <div class = "codeArea">
+   <pre>
+   class Detective
+   {
+     private:
+
+       string name;
+       string sidekick;
+       string solution;
+
+     public:
+
+       Detective(string name, string sidekick);
+       void setSolution(string solution);
+       bool compareSolution(Detective otherDetective);
+    };
+   </pre>
+   </div>
+   <p>You could then write your solution function like so:</p>
+   <div class = "codeArea">
+   <pre>
+   bool Detective::compareSolution(Detective otherDetective){
+      if (solution == otherDetective.solution){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+   </pre>
+   </div>
+   <p>Could we do the exact same thing in JavaScript?  The answer is no.  Here's why.  If we wrote our JavaScript code in the same way as C++, it would look like this:</p>
+   <div class = "codeArea">  
+   <pre>
+   var Detective = function(name, sidekick){
+     var name = name;
+     var sidekick = sidekick;
+     var solution;
+     return {
+       setSolution: function(newSolution) {
+          solution = newSolution;
+       },
+       compareSolution: function(otherDetective){
+          if (solution == otherDetective.solution){   // This will not work!!!
+            return true;
+          }
+          else{
+           return false;
+          }	
+       }
+     } 
+   }
+   </pre>		
+   </div>
+   <p>Notice the line that is commented, "This will not work!!!"  It does not work because, as we've already seen, the local variables that are preserved by the closure cannot be accessed directly via the dot operator.  Although preserved by the closure, they still behave like local variables that are only in scope for the functions that are used to access them. </p>
+   <p>In order to create this type of comparison in JavaScript then, we would need to add a "get" function for the solution.</p>
+   <div class = "codeArea">
+   <pre>
+   getSolution: function(){
+     return solution;
+   },
+   compareSolution: function(otherDetective){
+     if (solution == otherDetective.getSolution(){
+       return true;
+     }
+     else{
+       return false;
+     }
+   }
+   </pre>
+   </div>
+   <p>One effect of adding <span class="codeText">getSolution</span> is that the contents of the variable <span class="codeText">solution</span> can be accessed by that getter from anywhere in the program.  There is no way to restrict access completely to just the class itself.  Either everybody can access the solution or nobody can except the singular instance of the object itself.  In other words, the technique of using closures to create private members in JavaScript does not give us the same flexibility with information hiding that the <span class="codeText">private</span> keyword does in C++.  Other objects of the same class are in the very same position as anything outside the class.  For this same reason, the use of closures in JavaScript does not allow us replicate the <span class="codeText">friend</span> keyword that can be used with classes in C++ to allow them privileged acccess to private data members of another class.</p>
+   <p>Now that we've seen some limitations of using closures to create private variables in JavaScript, it's time to put it all together!</p>
+   <p>
+     <a href="gettersAndSetters.html">Previous</a>&nbsp&nbsp
+     <a href="putItTogether.html">Next</a>
+   </p>
+  </body>
+</html>

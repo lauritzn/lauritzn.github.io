@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">	
+  </head>
+  <body>
+    <h1>It's All Public</h1>
+	<p>The trouble with the Detective class as we've built it so far is that all its members, both data variables and functions, are public in nature.  The class will behave as though these members were all declared with the C++ keyword <span class="codeText">public</span>, letting us access them directly via the dot operator.</p>
+	<p>Unfortunately, this means that any code anywhere in the program can access -- and more importantly, modify! -- this information in any way that the syntax of JavaScript will allow.</p>
+	<p>In a mystery story, it would be bad news if someone tampered with the evidence, altering the detective's notebook.  The bad consequence in the detective story is that the wrong person gets blamed for the crime.  The bad consequence in programming is not only that the wrong thing happens, but also that debugging becomes very difficult because the problem could be caused by code literally anywhere in the program.  There's no good way to track down the "culprit."<br />
+	<p>To get to something resembling private members of a class, which cannot be directly accessed and altered from outside the class, we will need to introduce a new concept: closures.</p>	
+	<p>
+	  <a href = memberFunctions.html>Previous</a>&nbsp&nbsp
+	  <a href = closures.html>Next</a>
+	</p>
+  </body>
+</html>

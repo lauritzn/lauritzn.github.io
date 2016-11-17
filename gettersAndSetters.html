@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="utf-8">
+   <title>Getters and Setters</title>
+   <link rel="stylesheet" href="howToStyle.css" type="text/css">		
+  </head>
+  <body>
+   <h1> Getters and Setters Using Closures</h1>
+   <p> How did that go?  We came up with this for our class, complete with getters and setters: </p> 
+   <div class = "codeArea">
+   <pre>
+   var Detective = function(dName, dSidekick){
+     var name = dName;
+     var sidekick = dSidekick;
+     var notebook = []; 
+     notebook.push("It was a dark and stormy night"); 
+     return {
+       getName: function() {	
+         return name;
+       },	
+       getSidekick: function(){
+         return sidekick;
+       },		
+       setName: function(newName) {
+         name = newName;	
+       },
+       setSidekick: function (newSidekick){
+         sidekick = newSidekick;
+       },
+       solveCrime: function(){ 
+         console.log(name + " has solved the crime with the help of " + sidekick +"!");
+       },
+       addToNotebook: function(newNote){
+         notebook.push(newNote);
+       } 
+     }
+   };
+   </pre>
+   </div>
+   <p>If you wanted, you could also use the object notation that employs the <span class="codeText">this</span> keyword:</p>
+   <div class = "codeArea">
+   <pre>
+   function Detective(name, sidekick){
+     var notebook = []; 
+     notebook.push("It was a dark and stormy night"); 
+     this.getName = function() {	
+       return name;
+     };	
+     this.getSidekick = function(){
+       return sidekick;
+     };		
+     this.setName = function(newName) {
+       name = newName;	
+     };
+     this.setSidekick = function (newSidekick){
+       sidekick = newSidekick;
+     };
+     this.solveCrime = function(){ 
+       console.log(name + " has solved the crime with the help of " + sidekick +"!");
+     };
+     this.addToNotebook = function(newNote){
+       notebook.push(newNote);
+     };
+   };
+   </pre>
+   </div>
+   <p>The closures in this case still consist of each of the member functions along with the local variables that make up their environment (name, sidekick, notebook).  Notice that we don't necessarily have to declare separate local variables, either! The arguments passed to the function can in fact serve this purpose nicely.</p>
+   <p> You can test this out with the following code: </p>
+   <div class = "codeArea">
+   <pre>
+   var detective1 = new Detective("Sherlock Holmes", "Dr. Watson");
+   detective1.solveCrime();
+   detective1.setName("Hercule Poirot");
+   detective1.solveCrime();
+   </pre>
+   </div>
+   <p> It looks like we've cracked the case!  But before we rush to the conclusion that this will work just like, for example, C++ classes, let's move on to examine a few differences, and the problems they might create.</p>
+   <p>
+    <a href=objectNotation.html>Previous</a>&nbsp&nbsp
+    <a href=differences.html>Next</a>
+   </p>
+   </body>
+</html>

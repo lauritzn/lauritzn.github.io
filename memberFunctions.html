@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">
+  </head>
+  <body>    
+	<h1> Member Functions </h1>
+	<p> The idea of a function that can be called on any object of a specific class is one that will be familiar to anyone with a background in a language like C++. </p>
+	<p> Before we examine what this looks like in JavaScript, let's talk about what it <span class = "emphasis"> doesn't</span> look like. </p>
+	<p>If you create the function as a member of the instance of the class, it will work for that specific object, but not for any other objects of the class.  Here's a concrete example, building off the Detective class we just created:<br /></p>
+	
+	<div class="codeArea">
+	<pre>
+	var detective1 = new Detective("Sherlock Holmes", "Dr. Watson");
+	detective1.solveCrime = function(){
+		console.log(this.name + " has solved the crime with the help of " + this.sidekick +"!");
+	}
+	</pre>
+	</div>
+	
+	<p> If you then call</p>
+	<div class="codeArea">
+	<pre>
+	detective1.solveCrime();
+	</pre>
+	</div>
+	
+	<p>	the following will be logged to the console: <br/><br/>
+	<span class ="codeText"> Sherlock Holmes has solved the crime with the help of Dr. Watson! </span> <br/><br/>
+	But if you create a second detective and call the same function, like so: <br /></p>
+	<div class="codeArea">
+	<pre>
+	var detective2 = new Detective("Hercule Poirot", "Captain Hastings"); 
+	detective2.solveCrime(); // This does not work!!!
+	</pre>
+	</div>
+	<p>	The code will break with an error that reads "Uncaught TypeError."  This is because there is no function solveCrime() for detective2, only for detective1.</p>
+	
+	<p>	At the same time, it won't work to assign the function directly to the class name:</p>
+	<div class="codeArea">
+	<pre>
+	Detective.solveCrime = function(){ // This does not work!!
+		console.log(this.name + " has solved the crime with the help of " + this.sidekick +"!");
+	}
+	</pre>
+	</div>
+	<p>What we need is here is the <span class="codeText">prototype</span> keyword:</p>
+	<div class="codeArea">
+	<pre>
+	Detective.prototype.solveCrime = function(){
+		console.log(this.name + " has solved the crime with the help of " + this.sidekick +"!");
+	}
+	</pre>
+	</div>
+	<p>
+	By adding this function to the prototype for the class, we are building it into the "mold" for the class, from which all the instances of the class are created.  Hence all individual Detectives will have this function. </p> 
+	
+	<p>What does this give us so far, and how close are we to C++-style classes?  As it turns out, we still have quite a way to go...</p>
+	<p>
+	<a href= classicDetective.html>Previous</a>&nbsp&nbsp
+	<a href = publicVsPrivate.html> Next</a>
+	</p>
+  </body>
+</html>

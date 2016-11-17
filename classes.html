@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Classes in JavaScript</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">	
+  </head>
+  <body>
+	<h1>Classes in JavaScript</h1>
+    <p>	As we've already mentioned, classes in JavaScript don't have to be declared with a special <span class="codeText">class</span> keyword.  Instead, a class is defined by the constructor for the objects that belong to the class.</p>
+	<p>	A constructor has the format: 
+	  <div class = "codeArea">
+	  <pre>
+	  var ClassName = function(value){
+		this.member = value;
+	    };
+	  </pre>
+	  </div>
+	</p>
+	<p>	The first thing to notice is the use of the <span class="codeText">this</span> keyword.  Just like in C++, the keyword <span class="codeText">this</span> means that the argument sent to the function <span class="codeText">value</span> will be assigned to the <span class="codeText">member</span> property of this object, namely, the object the function is being called on.</p>
+	<p>	The constructor is automatically called whenever a new object of this class is created, on the object that is created.  To create the object we use the keyword <span class="codeText">new</span>.</p>
+	<p>Here's the general syntax:
+      <div class = "codeArea">
+	  <pre>
+	  var classObject1 = new ClassName("value1");
+	  </pre>
+	  </div>
+	</p>
+	<p>	This creates an object called <span class="codeText">classObject1</span> and, by means of the constructor above, assigns a value to <span class="codeText">classObject1.member</span>.
+	</p>
+	<p>	So far all of this is very general, though.  Let's look at a more specific example! </p>
+	<p>
+	  <a href="index.html"> Previous </a>&nbsp&nbsp&nbsp 
+	  <a href="classicDetective.html">Next</a>
+    </p>
+  </body>
+</html>

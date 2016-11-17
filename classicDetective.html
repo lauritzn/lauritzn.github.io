@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Detective Example</title>
+	<link rel="stylesheet" href="howToStyle.css" type="text/css">
+  </head>
+  <body>
+    <h1>The Class-ic Detective</h1>
+    <p> Imagine a murder mystery game in which the player gets to choose a detective.  To create the detective, the following class declaration can be used: </p>
+    <div class = "codeArea">
+    <pre>
+    var Detective = function(name, sidekick){
+      this.name = name;
+      this.sidekick = sidekick;
+      this.notebook = []; 
+      this.notebook.push("It was a dark and stormy night.");
+    }
+    </pre>
+    </div>
+    <p>A specific Detective object can then be created as follows:</p>
+    <div class = "codeArea">
+    <pre>
+    var detective1 = new Detective("Sherlock Holmes", "Watson");
+    </pre>
+    </div>
+    <p>	This calls the constructor, which initializes <span class="codeText">detective1.name</span> to "Sherlock Holmes", <span class="codeText">detective1.sidekick</span> to "Watson", and adds one default note to an array that represents this detective's notebook. (Yes, it's the default, because what mystery story doesn't take place on a dark and stormy night?)</p>
+    <p>So far so good.  Once those variables are initialized, though, we're probably going to want to do something with them.  That brings us to our next topic: member functions.</p>
+    <p>
+	  <a href = classes.html> Previous </a>&nbsp&nbsp 
+      <a href = memberFunctions.html> Next </a> 
+    </p>
+  </body> 
+</html>
